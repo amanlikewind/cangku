@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style rel="stylesheet" type="text/css">
+		.imgs{
+			width:800px;
+			height: 472px;
+			/*background: red;*/
+			position: relative;
+			margin:50px auto;
+		}
+		img{
+			width:100%;
+			height: 100%;
+			position: absolute;
+			display: none;
+
+		}
+		.dote{
+			width:336px;
+			height: 30px;
+			/*background: blue;*/
+			position: absolute;
+			left:50%;
+			top:85%;
+			margin-left: -168px;
+			z-index: 999;
+			display: flex;
+			justify-content:space-around;
+		}
+		.dote a{
+			width:30px;
+			height: 100%;
+			background: green;
+			border-radius: 50%;
+			opacity:0.5;
+		}
+		.dote .curr{
+			background:red;
+		}
+
+	</style>
+</head>
+<body>
+	<div class="imgs">
+		<img src="imgs/img1.jpg" alt="" class="img" style="display: block">
+		<img src="imgs/img2.jpg" alt="" class="img">
+		<img src="imgs/img3.jpg" alt="" class="img">
+		<img src="imgs/img4.jpg" alt="" class="img">
+		<img src="imgs/img5.jpg" alt="" class="img">
+		<div class="dote">
+			<a href="javascript:void(0)" class="curr"></a>
+			<a href="javascript:void(0)"></a>
+			<a href="javascript:void(0)"></a>
+			<a href="javascript:void(0)"></a>
+			<a href="javascript:void(0)"></a>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var m=0;
+	    var _img=document.getElementsByClassName("img");
+		var _dote=document.getElementsByClassName("dote")[0];
+		function mousedown()
+		{
+			for(var j=0;j<_img.length;j++)
+			{
+					_img[j].style.display="none";
+					_dote.children[j].className = _dote.children[j].className.replace("curr", "");
+			}
+				_img[this.index].style.display = "block";
+				this.className ="curr";
+				m=this.index;
+		}
+        
+		for(var i=0;i<_img.length;i++){
+			_dote.children[i].index=i; 
+			//为a标签绑定鼠标按下事件
+			_dote.children[i].onmousedown=mousedown;			
+				// _dote.children[i].onmouseup=function(){
+				// 	_dote.children[i].onmousedown=null;
+				// }
+
+		}
+		 setInterval(function(){
+		 		_dote.children[m].onmousedown();
+		 		m++;
+		 		if(m> _img.length-1)
+		 		m=0;
+		 },1000)
+			
+		// for(var m=0;m<_img.length;m++){
+		// 	setInterval(function(){
+
+		// 	// _dote.children[m].index=m;  
+		// 	_dote.children[m].onmousedown();
+		// 	console.log("glkdj")		
+		
+		//     },1000)	
+		//     // clearInterval();			
+		// }
+
+        
+		
+
+	</script>
+</body>
+</html>
